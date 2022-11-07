@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://BillionBanksWS.org" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://BillionBanksWS.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://BillionBanksWS.org">
+      <s:element name="AddUserDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contactNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secQ" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="physAdd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pw" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LogInResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuestion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuestionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQuestionResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CheckPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="answer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckPasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPasswordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateAccountResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAccounts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountsResult" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PopulateList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="accountNumber" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PopulateListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PopulateListResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentBalance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="selectedAccount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCurrentBalanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentBalanceResult" type="tns:ArrayOfDecimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDecimal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="decimal" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TransferMoney">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="destinationAcc" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceAccount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="amountToTransfer" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="currentBalanceSource" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="currentBalanceDest" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransferMoneyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRecentTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="accountNr" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecentTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRecentTransactionResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionvar" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="surname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contactNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secretQ" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="secretA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="physAdd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="WriteToLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="destinationAcc" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceAccount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="amountToTransfer" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="logFileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WriteToLogResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddUserDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserDetails" />
+  </wsdl:message>
+  <wsdl:message name="AddUserDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogInSoapIn">
+    <wsdl:part name="parameters" element="tns:LogIn" />
+  </wsdl:message>
+  <wsdl:message name="LogInSoapOut">
+    <wsdl:part name="parameters" element="tns:LogInResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQuestion" />
+  </wsdl:message>
+  <wsdl:message name="GetQuestionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQuestionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckPassword" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPassword" />
+  </wsdl:message>
+  <wsdl:message name="SetPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateAccount" />
+  </wsdl:message>
+  <wsdl:message name="CreateAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccounts" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PopulateListSoapIn">
+    <wsdl:part name="parameters" element="tns:PopulateList" />
+  </wsdl:message>
+  <wsdl:message name="PopulateListSoapOut">
+    <wsdl:part name="parameters" element="tns:PopulateListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentBalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentBalance" />
+  </wsdl:message>
+  <wsdl:message name="GetCurrentBalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="TransferMoneySoapIn">
+    <wsdl:part name="parameters" element="tns:TransferMoney" />
+  </wsdl:message>
+  <wsdl:message name="TransferMoneySoapOut">
+    <wsdl:part name="parameters" element="tns:TransferMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRecentTransaction" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRecentTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="WriteToLogSoapIn">
+    <wsdl:part name="parameters" element="tns:WriteToLog" />
+  </wsdl:message>
+  <wsdl:message name="WriteToLogSoapOut">
+    <wsdl:part name="parameters" element="tns:WriteToLogResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService1Soap">
+    <wsdl:operation name="AddUserDetails">
+      <wsdl:input message="tns:AddUserDetailsSoapIn" />
+      <wsdl:output message="tns:AddUserDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <wsdl:input message="tns:LogInSoapIn" />
+      <wsdl:output message="tns:LogInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestion">
+      <wsdl:input message="tns:GetQuestionSoapIn" />
+      <wsdl:output message="tns:GetQuestionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <wsdl:input message="tns:CheckPasswordSoapIn" />
+      <wsdl:output message="tns:CheckPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <wsdl:input message="tns:SetPasswordSoapIn" />
+      <wsdl:output message="tns:SetPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <wsdl:input message="tns:CreateAccountSoapIn" />
+      <wsdl:output message="tns:CreateAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccounts">
+      <wsdl:input message="tns:GetAccountsSoapIn" />
+      <wsdl:output message="tns:GetAccountsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PopulateList">
+      <wsdl:input message="tns:PopulateListSoapIn" />
+      <wsdl:output message="tns:PopulateListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentBalance">
+      <wsdl:input message="tns:GetCurrentBalanceSoapIn" />
+      <wsdl:output message="tns:GetCurrentBalanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferMoney">
+      <wsdl:input message="tns:TransferMoneySoapIn" />
+      <wsdl:output message="tns:TransferMoneySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentTransaction">
+      <wsdl:input message="tns:GetRecentTransactionSoapIn" />
+      <wsdl:output message="tns:GetRecentTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDetails">
+      <wsdl:input message="tns:UpdateDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WriteToLog">
+      <wsdl:input message="tns:WriteToLogSoapIn" />
+      <wsdl:output message="tns:WriteToLogSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddUserDetails">
+      <soap:operation soapAction="http://BillionBanksWS.org/AddUserDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <soap:operation soapAction="http://BillionBanksWS.org/LogIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestion">
+      <soap:operation soapAction="http://BillionBanksWS.org/GetQuestion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap:operation soapAction="http://BillionBanksWS.org/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <soap:operation soapAction="http://BillionBanksWS.org/SetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <soap:operation soapAction="http://BillionBanksWS.org/CreateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccounts">
+      <soap:operation soapAction="http://BillionBanksWS.org/GetAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PopulateList">
+      <soap:operation soapAction="http://BillionBanksWS.org/PopulateList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentBalance">
+      <soap:operation soapAction="http://BillionBanksWS.org/GetCurrentBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferMoney">
+      <soap:operation soapAction="http://BillionBanksWS.org/TransferMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentTransaction">
+      <soap:operation soapAction="http://BillionBanksWS.org/GetRecentTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDetails">
+      <soap:operation soapAction="http://BillionBanksWS.org/UpdateDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WriteToLog">
+      <soap:operation soapAction="http://BillionBanksWS.org/WriteToLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddUserDetails">
+      <soap12:operation soapAction="http://BillionBanksWS.org/AddUserDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <soap12:operation soapAction="http://BillionBanksWS.org/LogIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestion">
+      <soap12:operation soapAction="http://BillionBanksWS.org/GetQuestion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap12:operation soapAction="http://BillionBanksWS.org/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPassword">
+      <soap12:operation soapAction="http://BillionBanksWS.org/SetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <soap12:operation soapAction="http://BillionBanksWS.org/CreateAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccounts">
+      <soap12:operation soapAction="http://BillionBanksWS.org/GetAccounts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PopulateList">
+      <soap12:operation soapAction="http://BillionBanksWS.org/PopulateList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentBalance">
+      <soap12:operation soapAction="http://BillionBanksWS.org/GetCurrentBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferMoney">
+      <soap12:operation soapAction="http://BillionBanksWS.org/TransferMoney" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentTransaction">
+      <soap12:operation soapAction="http://BillionBanksWS.org/GetRecentTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDetails">
+      <soap12:operation soapAction="http://BillionBanksWS.org/UpdateDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WriteToLog">
+      <soap12:operation soapAction="http://BillionBanksWS.org/WriteToLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService1">
+    <wsdl:port name="WebService1Soap" binding="tns:WebService1Soap">
+      <soap:address location="https://localhost:44327/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService1Soap12" binding="tns:WebService1Soap12">
+      <soap12:address location="https://localhost:44327/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
